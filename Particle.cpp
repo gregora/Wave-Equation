@@ -1,8 +1,7 @@
 #include "Particle.h"
 
-Particle::Particle(float u, float v, float du, float dv){
+Particle::Particle(float u, float du, float c){
     this->u = u;
-    this->v = v;
     this->du = du;
-    this->dv = dv;
+    this->c = c;
 }
