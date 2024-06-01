@@ -14,6 +14,12 @@ $$
 where $u(x, y, t)$ is the amplitude of the wave, $c$ is the wave speed, and $x$ and $y$ are the spatial coordinates.
 
 
+## Example
+
+The following image is the result of the simulation of a delta impulse in the center of the domain.
+![Delta impulse](render/delta.png)
+
+
 
 ## Dependencies
 - [SFML](https://www.sfml-dev.org/)
