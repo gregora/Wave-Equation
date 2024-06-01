@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include <SFML/Graphics.hpp>
+#include <math.h>
 
 typedef unsigned int uint;
 
