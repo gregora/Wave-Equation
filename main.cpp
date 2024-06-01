@@ -5,7 +5,8 @@
 
 int main(){
 
-    Field field(100, 100, 1.0f);
+    Field field(200, 200, 1.0f);
+    field.scale = 5.0f;
 
     for(uint y = 0; y < field.height; y++){
         for(uint x = 0; x < field.width; x++){

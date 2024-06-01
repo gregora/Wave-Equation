@@ -13,6 +13,8 @@ class Field : public sf::Transformable, public sf::Drawable {
     float dx = 1.0f;
     Particle* particles;
 
+    float scale = 1.0f;
+
     Field(uint width, uint height, float dx = 1.0f);
     ~Field();
 
