@@ -33,10 +33,10 @@ void Field::physics(float dt, uint substeps){
                 Particle& pD = *get(x, y + 1);
 
                 float alpha = p.c * dt / dx;
-                float u_new = -(p.du) + 2*p.u + alpha*alpha*(pL.u + pR.u + pU.u + pD.u - 4*p.u);
+                float u_new = -(p.u - dt*p.du) + 2*p.u + alpha*alpha*(pL.u + pR.u + pU.u + pD.u - 4*p.u);
 
                 p_new.c = p.c;
-                p_new.du = p.u;
+                p_new.du = (u_new - p.u) / dt;
                 p_new.u = u_new * pow(0.995, dt);
 
             }

@@ -16,19 +16,13 @@ int main(){
         }
     }
 
-    for(uint y = 1; y < field.height - 1; y++){
-        for(uint x = 1; x < field.width - 1; x++){
-            //field.get(x, y)->u = 0.5f * sin((x + y) / 10.0f);
+
+    for(uint y = 95; y < 105; y++){
+        for(uint x = 95; x < 105; x++){
+            field.get(x, y)->u = 1.0f;
         }
     }
 
-    //field.get(50, 50)->u = 0.5f;
-
-    for(uint x = 48; x < 52; x++){
-        for(uint y = 48; y < 52; y++){
-            field.get(x, y)->u = 0.5f;
-        }
-    }
 
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "Wave Equation");
 
