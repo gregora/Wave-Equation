@@ -68,8 +68,8 @@ void Field::physics(float dt, uint substeps){
 }
 
 void Field::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    
-    sf::RectangleShape rect(sf::Vector2f(scale, scale));
+
+    sf::Uint8 texture[width*height*4];
 
     for(uint y = 0; y < height; y++){
         for(uint x = 0; x < width; x++){
@@ -82,10 +82,22 @@ void Field::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
             u = u + 0.5f;
 
-            rect.setPosition(x*scale, y*scale);
-            rect.setFillColor(sf::Color(255*u, 255*u, 255*u));
+            texture[(y*width + x)*4 + 0] = 255*u;
+            texture[(y*width + x)*4 + 1] = 255*u;
+            texture[(y*width + x)*4 + 2] = 255*u;
+            texture[(y*width + x)*4 + 3] = 255;
 
-            target.draw(rect);
         }
     }
+
+
+    sf::Texture tex;
+
+    tex.create(width, height);
+    tex.update(texture, width, height, 0, 0);
+
+    sf::Sprite sprite(tex);
+    sprite.setScale(scale, scale);
+    target.draw(sprite, states);
+
 }
