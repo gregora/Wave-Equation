@@ -7,6 +7,10 @@ Field::Field(uint width, uint height, float dx){
     this->width = width;
     this->height = height;
     this->particles = new Particle[width*height];
+
+    cudaMalloc(&device_particles1, width*height*sizeof(Particle));
+    cudaMalloc(&device_particles2, width*height*sizeof(Particle));
+
 }
 
 Field::~Field(){
@@ -47,14 +51,7 @@ void Field::physics(float dt, uint substeps){
 
     dt /= substeps;
 
-    Particle* device_particles1;
-    Particle* device_particles2;
-
-    cudaMalloc(&device_particles1, width*height*sizeof(Particle));
-    cudaMalloc(&device_particles2, width*height*sizeof(Particle));
-
     cudaMemcpy(device_particles1, particles, width*height*sizeof(Particle), cudaMemcpyHostToDevice);
-
     for(uint i = 0; i < substeps; i++){
 
         physics_CUDA<<<width - 2, height - 2>>>(dt, dx, device_particles1, device_particles2, width);
@@ -66,9 +63,6 @@ void Field::physics(float dt, uint substeps){
 
     }
     cudaMemcpy(particles, device_particles1, width*height*sizeof(Particle), cudaMemcpyDeviceToHost);
-
-    cudaFree(device_particles1);
-    cudaFree(device_particles2);
 
 }
 
