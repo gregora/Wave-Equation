@@ -6,8 +6,9 @@
 
 int main(){
 
-    Field field(400, 400, 1.0f);
-    field.scale = 2.5f;
+    Field field(1000, 1000, 1.0f);
+    field.scale = 1.0f;
+    field.dx = 0.1f;
 
     bool analytics = true;
 
@@ -20,8 +21,8 @@ int main(){
     }
 
 
-    for(uint y = 95; y < 105; y++){
-        for(uint x = 95; x < 105; x++){
+    for(uint y = 395; y < 405; y++){
+        for(uint x = 495; x < 505; x++){
             field.get(x, y)->u = 1.0f;
         }
     }
@@ -40,7 +41,7 @@ int main(){
 
 
         std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
-        field.physics(1.0f, 1);
+        field.physics(1.0f, 10);
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
         
         window.clear();

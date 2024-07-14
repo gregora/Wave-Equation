@@ -3,10 +3,10 @@ CUDA_PATH = /usr/local/cuda
 all: main.out mainCUDA.out
 
 Particle.o: Particle.cpp Particle.h
-	nvcc -c Particle.cpp
+	g++ -c Particle.cpp
 
 Field.o: Field.cpp Field.h
-	nvcc -c Field.cpp
+	g++ -c Field.cpp
 
 main.out: main.cpp Particle.h Field.h Particle.o Field.o
 	g++ -o main.out main.cpp Particle.o Field.o -lsfml-graphics -lsfml-window -lsfml-system
