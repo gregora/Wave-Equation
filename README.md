@@ -5,7 +5,9 @@ A numerical solver for the wave equation written in C++. CUDA support is also ad
 
 ### Wave Equation
 
-The wave equation is a second-order linear partial differential equation that describes the motion of waves in a medium. The two dimensional equation reads:
+The wave equation is a second-order linear partial differential equation that describes the motion of waves in a medium.
+
+The two dimensional equation reads:
 
 $$
 \frac{\partial^2 u}{\partial t^2} = c^2 \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} \right)
@@ -24,9 +26,14 @@ The following image is the result of the simulation of a delta impulse in the ce
 
 ## Compilation
 Compilation of all files can be done using `make` command.
+
 As this project supports both CUDA and normal processing those two executables can be compiled seperately.
+
 To compile only non-CUDA version run `make main.out` and to compile the CUDA version using nvcc run `make mainCUDA.out`.
 
 ## CPU vs CUDA
-This project was tested on Ryzen 7 5800X CPU and Nvidia RTX3060 GPU. The performance difference is starking. Physics function call takes ~0.30 seconds on CPU and ~0.012 seconds on GPU.
+This project was tested on Ryzen 7 5800X CPU and Nvidia RTX3060 GPU.
+
+The performance difference is starking. Physics function call takes ~0.30 seconds on CPU and ~0.012 seconds on GPU.
+
 That makes the CUDA version ~25x faster.
