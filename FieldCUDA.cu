@@ -52,6 +52,7 @@ void Field::physics(float dt, uint substeps){
     dt /= substeps;
 
     cudaMemcpy(device_particles1, particles, width*height*sizeof(Particle), cudaMemcpyHostToDevice);
+    
     for(uint i = 0; i < substeps; i++){
 
         physics_CUDA<<<width - 2, height - 2>>>(dt, dx, device_particles1, device_particles2, width);
@@ -60,8 +61,8 @@ void Field::physics(float dt, uint substeps){
         Particle *temp = device_particles1;
         device_particles1 = device_particles2;
         device_particles2 = temp;
-
     }
+
     cudaMemcpy(particles, device_particles1, width*height*sizeof(Particle), cudaMemcpyDeviceToHost);
 
 }

@@ -2,11 +2,14 @@
 #include <vector>
 #include "Field.h"
 #include "math.h"
+#include <chrono>
 
 int main(){
 
-    Field field(200, 200, 1.0f);
-    field.scale = 5.0f;
+    Field field(400, 400, 1.0f);
+    field.scale = 2.5f;
+
+    bool analytics = true;
 
     for(uint y = 0; y < field.height; y++){
         for(uint x = 0; x < field.width; x++){
@@ -35,12 +38,26 @@ int main(){
             }
          }
 
-        field.physics(1.0f, 1);
 
+        std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
+        field.physics(1.0f, 1);
+        std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
+        
         window.clear();
         window.draw(field);
         window.display();
 
+        std::chrono::high_resolution_clock::time_point t3 = std::chrono::high_resolution_clock::now();
+
+        if (analytics){
+           std::chrono::duration<double> time_span1 = std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
+            std::chrono::duration<double> time_span2 = std::chrono::duration_cast<std::chrono::duration<double>>(t3 - t2);
+
+
+            std::cout << "Physics: " << time_span1.count() << " seconds" << std::endl;
+            std::cout << "Render: " << time_span2.count() << " seconds" << std::endl;
+        }
+        
     }
 
 }
