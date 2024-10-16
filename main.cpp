@@ -18,7 +18,7 @@ int main(){
         for(uint x = 0; x < field.width; x++){
             field.get(x, y)->u = 0.0f;
             field.get(x, y)->du = 0.0f;
-            field.get(x, y)->c = 0.5f;
+            field.get(x, y)->c = 1.0f;
         }
     }
 
