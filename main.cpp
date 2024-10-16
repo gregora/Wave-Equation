@@ -4,7 +4,32 @@
 #include "math.h"
 #include <chrono>
 
+class Boat {
+    public:
+    float x = 200;
+    float y = 200;
+
+    float v = 0;
+
+    float ang = 0;
+
+    void physics(float dt){
+        x += dt * cos(ang) * v;
+        y += dt * sin(ang) * v;
+    }
+
+    void updateField(Field& field){
+        field.get(x + (int) cos(ang)*10, y + (int) sin(ang)*10) -> u = v*0.1;
+        field.get(x - (int) cos(ang)*10, y - (int) sin(ang)*10) -> u = -v*0.1;
+
+
+    }
+
+};
+
 int main(){
+
+    Boat boat;
 
     Field field(1000, 1000, 1.0f);
     field.scale = 1.0f;
@@ -46,14 +71,14 @@ int main(){
         // source 1
         for(uint y = 395; y < 405; y++){
             for(uint x = 495; x < 505; x++){
-                field.get(x, y)->u = sin(time*0.5);
+                field.get(x, y)->u = sin(time*0.5)*0.1;
             }
         }
 
         // source 2
         for(uint y = 595; y < 605; y++){
             for(uint x = 395; x < 405; x++){
-                field.get(x, y)->u = sin(time*0.4);
+                field.get(x, y)->u = sin(time*0.4)*0.1;
             }
         }
 
@@ -76,6 +101,32 @@ int main(){
             std::cout << "Physics: " << time_span1.count() << " seconds" << std::endl;
             std::cout << "Render: " << time_span2.count() << " seconds" << std::endl;
         }
+
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+            boat.v += 0.1;
+        }
+
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+            boat.v += -0.1;
+        }
+
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+            boat.ang += -0.1;
+        }
+
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+            boat.ang += 0.1;
+        }
+
+        boat.physics(dt);
+        boat.updateField(field);
+
+
+
         time += dt;
     }
 
