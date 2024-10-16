@@ -42,11 +42,21 @@ int main(){
             }
          }
 
+
+        // source 1
         for(uint y = 395; y < 405; y++){
             for(uint x = 495; x < 505; x++){
                 field.get(x, y)->u = sin(time*0.5);
             }
         }
+
+        // source 2
+        for(uint y = 595; y < 605; y++){
+            for(uint x = 395; x < 405; x++){
+                field.get(x, y)->u = sin(time*0.4);
+            }
+        }
+
 
         std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
         field.physics(dt, 1);
