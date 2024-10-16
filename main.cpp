@@ -12,6 +12,8 @@ int main(){
 
     bool analytics = true;
 
+    float dt = 0.05f;
+
     for(uint y = 0; y < field.height; y++){
         for(uint x = 0; x < field.width; x++){
             field.get(x, y)->u = 0.0f;
@@ -29,6 +31,7 @@ int main(){
 
 
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "Wave Equation");
+    float time = 0;
 
     while(window.isOpen()){
 
@@ -39,9 +42,14 @@ int main(){
             }
          }
 
+        for(uint y = 395; y < 405; y++){
+            for(uint x = 495; x < 505; x++){
+                field.get(x, y)->u = sin(time*0.5);
+            }
+        }
 
         std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
-        field.physics(1.0f, 10);
+        field.physics(dt, 1);
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
         
         window.clear();
@@ -58,7 +66,7 @@ int main(){
             std::cout << "Physics: " << time_span1.count() << " seconds" << std::endl;
             std::cout << "Render: " << time_span2.count() << " seconds" << std::endl;
         }
-        
+        time += dt;
     }
 
 }
